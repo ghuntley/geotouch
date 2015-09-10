@@ -20,7 +20,7 @@ namespace GeoTouch.iOS
 		{
 		}
 
-		public override void Draw (RectangleF rect)
+		public override void Draw (CGRect rect)
 		{
 			var currentContext = UIGraphics.GetCurrentContext();
 			HandleShapeDraw (currentContext);
