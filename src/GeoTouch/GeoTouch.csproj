@@ -49,4 +49,15 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+    <Folder Include="Pages\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ColourLovers.ServiceModel\ColourLovers.ServiceModel.csproj">
+      <Project>{EB6DBD94-4F9F-43C8-951B-4B12EF320BAE}</Project>
+      <Name>ColourLovers.ServiceModel</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
