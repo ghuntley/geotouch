@@ -17,6 +17,13 @@ namespace GeoTouch
 
 			InitializeComponent ();
 			BindingContext = ViewModel;
+
+			FrameTapGestureRecognizer.Tapped += OnTapGestureRecognizerTapped;
+		}
+
+		public void OnTapGestureRecognizerTapped(object sender, EventArgs args)
+		{
+
 		}
 	}
 }

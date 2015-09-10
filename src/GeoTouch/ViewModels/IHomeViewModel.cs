@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Windows.Input;
+
+using Splat;
+using System.Drawing;
 
 namespace GeoTouch
 {
 	public interface IHomeViewModel
 	{
-		void PlaceShape();
+		ICommand PlaceShape();
 
 		string Title { get; set;}
 	}

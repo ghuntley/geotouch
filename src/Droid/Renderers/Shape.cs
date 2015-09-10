@@ -5,7 +5,7 @@ using Xamarin.Forms.Platform.Android;
 using Android.Content;
 using Android.Util;
 
-using GeoTouch.Views;
+using GeoTouch.Controls;
 
 namespace GeoTouch.Droid
 {

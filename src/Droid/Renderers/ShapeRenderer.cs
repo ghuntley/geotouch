@@ -3,7 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using GeoTouch;
 using GeoTouch.Droid;
-using GeoTouch.Views;
+using GeoTouch.Controls;
 using Android.Views;
 using Android.Graphics;
 
@@ -16,16 +16,16 @@ namespace GeoTouch.Droid
 		{
 		}
 
-		protected override void OnElementChanged (ElementChangedEventArgs<ShapeView> e)
-		{
-			base.OnElementChanged (e);
-
-			if (e.OldElement != null || this.Element == null)
-				return;
-
-			SetNativeControl (new Shape (Resources.DisplayMetrics.Density, Context) {
-				ShapeView = Element
-			});
-		}
+//		protected override void OnElementChanged (ElementChangedEventArgs<ShapeView> e)
+//		{
+//			base.OnElementChanged (e);
+//
+//			if (e.OldElement != null || this.Element == null)
+//				return;
+//
+//			SetNativeControl (new Shape (Resources.DisplayMetrics.Density, Context) {
+//				ShapeView = Element
+//			});
+//		}
 	}
 }
