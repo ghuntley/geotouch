@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 
 using TwinTechs.Gestures;
+using GeoTouch.Models;
 using GeoTouch.Controls;
 using GeoTouch.ViewModels;
 
@@ -39,7 +40,7 @@ namespace GeoTouch
 			var positionInView = recognizer.LocationInView (view);
 			var positionInParentView = recognizer.LocationInView (view.ParentView);
 
-			var shape = new ShapeView();
+			var shape = new ShapeView() { Shape = Shape.Circle};
 				
 			AbsoluteLayout.SetLayoutFlags (shape,
 				AbsoluteLayoutFlags.None);

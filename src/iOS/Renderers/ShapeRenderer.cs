@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.ComponentModel;
 using Xamarin.Forms.Platform.iOS;
 using Xamarin.Forms;
 
@@ -22,21 +23,32 @@ namespace GeoTouch.iOS
 		public ShapeRenderer ()
 		{
 			_randomColourService = Locator.Current.GetService<IRandomColourService> ();
-			this.BackgroundColor = _randomColourService.GenerateRandomColour().ToUIColor();
 		}
 
-//		public override void Draw (CGRect rect)
-//		{
-//			var currentContext = UIGraphics.GetCurrentContext();
-//			HandleShapeDraw (currentContext);
-//		}
-//
-//		protected virtual void HandleShapeDraw (CGContext currentContext)
-//		{
-//			currentContext.SetLineWidth (5);
-//			currentContext.SetFillColor (Color.Red.ToCGColor());
-//			currentContext.SetStrokeColor (Color.Black.ToCGColor());
-//		}
+		// can access shape via this.
+		protected override void OnElementChanged (ElementChangedEventArgs<View> e)
+		{
+			base.OnElementChanged (e.NewElement);
+		}
+
+		// fired every time the property binding changes.
+		protected override void OnElementPropertyChanged (object sender, PropertyChangedEventArgs e)
+		{
+			base.OnElementPropertyChanged (sender, e);
+
+			if (Control == null || Element == null)
+				return;
+		}
+
+		public override void Draw (CGRect rect)
+		{
+			using (var context = UIGraphics.GetCurrentContext ()) {
+				var path = CGPath.EllipseFromRect (rect);
+				context.AddPath (path);
+				context.SetFillColor (_randomColourService.GenerateRandomColour ().ToCGColor ());
+				context.DrawPath (CGPathDrawingMode.Fill);
+			}
+		}
 	}
 }
 
