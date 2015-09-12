@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
+using GeoTouch.Controls;
 using GeoTouch.ViewModels;
 
 namespace GeoTouch
@@ -25,19 +26,15 @@ namespace GeoTouch
 		public void OnTapGestureRecognizerTapped(object sender, EventArgs args)
 		{
 
-			var label = new Label {
-				Text = "Hello World",
-				TextColor = Color.Black
-			};
-
-			AbsoluteLayout.SetLayoutFlags (label,
+			var shape = new ShapeView ();
+				
+			AbsoluteLayout.SetLayoutFlags (shape,
 				AbsoluteLayoutFlags.None);
 
-			AbsoluteLayout.SetLayoutBounds (label,
+			AbsoluteLayout.SetLayoutBounds (shape,
 				new Rectangle (100f, 200f, 200f, 50f));
 
-
-			Canvas.Children.Add (label);
+			Canvas.Children.Add (shape);
 			//			ViewModel.PlaceShape(new PointF(sender.X);
 		}
 	}

@@ -18,7 +18,7 @@ namespace GeoTouch.iOS
 	{
 		public ShapeRenderer ()
 		{
-			this.BackgroundColor = UIColor.Red;
+			this.BackgroundColor = UIColor.Black;
 		}
 
 //		public override void Draw (CGRect rect)
