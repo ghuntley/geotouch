@@ -6,7 +6,7 @@
 	    	<controls:ShapeView/>
 	    	</StackLayout>
 -->
-			<AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Red">
+			<AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Red" x:Name="Canvas">
 				<AbsoluteLayout.GestureRecognizers>
 					<TapGestureRecognizer x:Name="FrameTapGestureRecognizer" Command="{Binding PlaceShape}" CommandParameter="this"/>
 				</AbsoluteLayout.GestureRecognizers>
