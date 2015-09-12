@@ -99,6 +99,10 @@
       <Project>{EC9ABB5A-A1EE-4FBE-BCA7-0F536B5E3014}</Project>
       <Name>GeoTouch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TwinTechsForms.iOS\TwinTechsForms.iOS.csproj">
+      <Project>{C0D2B64A-CBFC-42A2-B8A6-B8673976EE14}</Project>
+      <Name>TwinTechsForms.iOS</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default.png" />
