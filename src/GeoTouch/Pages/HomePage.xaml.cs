@@ -1,4 +1,5 @@
 ﻿using System;
+using Splat;
 using System.Collections.Generic;
 
 using Xamarin.Forms;
@@ -23,7 +24,7 @@ namespace GeoTouch
 
 		public void OnTapGestureRecognizerTapped(object sender, EventArgs args)
 		{
-
+			//			ViewModel.PlaceShape(new PointF(sender.X);
 		}
 	}
 }
