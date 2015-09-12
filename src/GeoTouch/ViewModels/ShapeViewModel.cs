@@ -13,7 +13,7 @@ namespace GeoTouch.ViewModels
 		public string Title {get; set;}
 		public Shape Shape {get; set;}
 		public string ImageUrl {get; set;}
-		public string HexColour {get; set;}
+		public Color Colour {get; set;}
 		public RectangleF Dimensions {get; set;}
 		public ICommand RefreshShape { get; private set; }
 	}
