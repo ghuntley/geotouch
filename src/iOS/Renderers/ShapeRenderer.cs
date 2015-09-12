@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using CoreGraphics;
 using UIKit;
 
+using Splat;
 using GeoTouch;
 using GeoTouch.Controls;
 using GeoTouch.iOS;
@@ -16,9 +17,12 @@ namespace GeoTouch.iOS
 {
 	public class ShapeRenderer :  ViewRenderer
 	{
+		private IRandomColourService _randomColourService;
+
 		public ShapeRenderer ()
 		{
-			this.BackgroundColor = UIColor.Black;
+			_randomColourService = Locator.Current.GetService<IRandomColourService> ();
+			this.BackgroundColor = _randomColourService.GenerateRandomColour().ToUIColor();
 		}
 
 //		public override void Draw (CGRect rect)
