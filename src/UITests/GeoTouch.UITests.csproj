@@ -43,12 +43,6 @@
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Droid\GeoTouch.Droid.csproj">
-      <Project>{189C3E4D-8D34-4DBC-B549-2085DE1336D1}</Project>
-      <Name>GeoTouch.Droid</Name>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests.cs" />
