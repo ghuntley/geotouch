@@ -43,6 +43,7 @@ namespace GeoTouch
 		private List<Colors> _colors = new List<Colors> ();
 		private List<Patterns> _patterns = new List<Patterns> ();
 
+        /// <exception cref="">exception will be thrown if the cache is empty (ie. cache empty due to no network connectivity)</exception>
 		public Colors GetNextRandomColour()
 		{
 			var color = _colors.Last();
@@ -51,6 +52,7 @@ namespace GeoTouch
 			return color;
 		}
 
+        /// <exception cref="">exception will be thrown if the cache is empty (ie. cache empty due to no network connectivity)</exception>
 		public Patterns GetNextRandomPattern()
 		{
 			var pattern = _patterns.Last ();
