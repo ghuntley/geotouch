@@ -44,16 +44,16 @@ namespace GeoTouch
             Client = client;
         }
 
-        public virtual Task<ColourLovers.ServiceModel.Colors> GetRandomColour()
+        public virtual Task<List<ColourLovers.ServiceModel.Colors>> GetRandomColour()
         {
             var arguments = new object[] {  };
-            return (Task<ColourLovers.ServiceModel.Colors>) methodImpls["GetRandomColour"](Client, arguments);
+            return (Task<List<ColourLovers.ServiceModel.Colors>>) methodImpls["GetRandomColour"](Client, arguments);
         }
 
-        public virtual Task<ColourLovers.ServiceModel.Patterns> GetRandomPattern()
+        public virtual Task<List<ColourLovers.ServiceModel.Patterns>> GetRandomPattern()
         {
             var arguments = new object[] {  };
-            return (Task<ColourLovers.ServiceModel.Patterns>) methodImpls["GetRandomPattern"](Client, arguments);
+            return (Task<List<ColourLovers.ServiceModel.Patterns>>) methodImpls["GetRandomPattern"](Client, arguments);
         }
 
     }

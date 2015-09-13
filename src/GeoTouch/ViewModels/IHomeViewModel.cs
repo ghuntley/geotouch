@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Splat;
@@ -8,7 +9,7 @@ namespace GeoTouch.ViewModels
 {
 	public interface IHomeViewModel
 	{
-		ShapeViewModel GenerateRandomShape();
+		Task<ShapeViewModel> GenerateRandomShapeAsync();
 
 		ICommand PlaceShape();
 

@@ -3,6 +3,7 @@ using Splat;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
+using System.Threading.Tasks;
 using TwinTechs.Gestures;
 using GeoTouch.Models;
 using GeoTouch.Controls;
@@ -32,7 +33,8 @@ namespace GeoTouch
 			Canvas.RemoveAllGestureRecognizers();
 		}
 
-		void OnCanvasTap (TwinTechs.Gestures.BaseGestureRecognizer recognizer, TwinTechs.Gestures.GestureRecognizerState state)
+		// TODO: Resolve async void
+		private async void OnCanvasTap (TwinTechs.Gestures.BaseGestureRecognizer recognizer, TwinTechs.Gestures.GestureRecognizerState state)
 		{
 			var tapRecognizer = recognizer as TwinTechs.Gestures.TapGestureRecognizer;
 			var view = recognizer.View;
@@ -41,7 +43,7 @@ namespace GeoTouch
 			var positionInParentView = recognizer.LocationInView (view.ParentView);
 
 
-			var shapeViewModel = ViewModel.GenerateRandomShape ();
+			var shapeViewModel = await ViewModel.GenerateRandomShapeAsync ();
 			var shapeView = new ShapeView () {
 				BindingContext = shapeViewModel
 			};

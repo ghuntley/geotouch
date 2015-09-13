@@ -10,9 +10,9 @@ namespace GeoTouch
 	public interface IColourLoversApi
 	{
 		[Get("/colors/random?format=json")]
-		Task<ColourLovers.ServiceModel.Colors> GetRandomColour();
+		Task<List<ColourLovers.ServiceModel.Colors>> GetRandomColour();
 
 		[Get("/patterns/random?format=json")]
-		Task<ColourLovers.ServiceModel.Patterns> GetRandomPattern();
+		Task<List<ColourLovers.ServiceModel.Patterns>> GetRandomPattern();
 	}
 }

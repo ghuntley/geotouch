@@ -66,5 +66,6 @@ namespace ColourLovers.ServiceModel
 		public string imageUrl { get; set; }
 		public string badgeUrl { get; set; }
 		public string apiUrl { get; set; }
-	}}
+	}
+}
 

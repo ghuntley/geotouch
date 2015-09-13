@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace GeoTouch.ViewModels
 			return null;
 		}
 
-		public ShapeViewModel GenerateRandomShape ()
+		public async Task<ShapeViewModel> GenerateRandomShapeAsync()
 		{
 			var viewModel = new ShapeViewModel ();
 
@@ -31,19 +32,27 @@ namespace GeoTouch.ViewModels
 				viewModel.Shape = Shape.Circle;
 			}
 
-			viewModel.Color = _randomColourService.GenerateRandomColor ();
+			var response = await _colourLoversService.UserInitiated.GetRandomColour();
+			var result = response.Single ();
+
+			viewModel.Color = Color.FromHex(result.hex);
+//			viewModel.Color = _randomColourService.GenerateRandomColor ();
 
 			return viewModel;
 		}
 
 		private Random _random;
+		private IColourLoversService _colourLoversService;
 		private IRandomColorService _randomColourService;
 
 		public string Title { get; set; }
 
-		public HomeViewModel (IRandomColorService randomColourService = null)
+		public HomeViewModel (IRandomColorService randomColourService = null, IColourLoversService colourLoversService = null)
 		{
 			_randomColourService = randomColourService ?? Locator.Current.GetService<IRandomColorService> ();
+
+			_colourLoversService = colourLoversService ?? Locator.Current.GetService<IColourLoversService> ();
+
 			_random = new Random ();
 
 			Task.Run (async () => 
