@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Net.Http;
+using System.Net;
 
 using GeoTouch.Models;
 using GeoTouch.Services;
@@ -58,11 +60,15 @@ namespace GeoTouch.ViewModels
                 viewModel.Shape = Shape.Circle;
             }
 
-            var response = await _colourLoversService.UserInitiated.GetRandomColour();
-            var result = response.Single ();
+			try {
+	            var response = await _colourLoversService.UserInitiated.GetRandomColour();
+	            var result = response.Single ();
 
-            viewModel.Color = Color.FromHex(result.hex);
-            //			viewModel.Color = _randomColourService.GenerateRandomColor ();
+	            viewModel.Color = Color.FromHex(result.hex);
+			}
+			catch (WebException ex) {
+				viewModel.Color = _randomColourService.GenerateRandomColor ();
+			}
 
             return viewModel;
         }
