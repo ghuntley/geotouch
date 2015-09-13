@@ -107,4 +107,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ColourLovers.ServiceModel\ColourLovers.ServiceModel.csproj">
+      <Project>{EB6DBD94-4F9F-43C8-951B-4B12EF320BAE}</Project>
+      <Name>ColourLovers.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinTechsForms.Core\TwinTechsForms.Core.csproj">
+      <Project>{7C5D7E33-C77E-475F-BE8B-359CD164A4E5}</Project>
+      <Name>TwinTechsForms.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
