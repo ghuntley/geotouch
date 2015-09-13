@@ -40,7 +40,7 @@ namespace GeoTouch
 			var positionInView = recognizer.LocationInView (view);
 			var positionInParentView = recognizer.LocationInView (view.ParentView);
 
-			var shape = new ShapeView() { Shape = Shape.Circle};
+			var shape = new ShapeView() { Color = ViewModel.GenerateRandomColor(), Shape = Shape.Circle };
 				
 			AbsoluteLayout.SetLayoutFlags (shape,
 				AbsoluteLayoutFlags.None);

@@ -2,26 +2,26 @@
 using Splat;
 using Xamarin.Forms;
 
-namespace GeoTouch
+namespace GeoTouch.Services
 {
-	public interface IRandomColourService
+	public interface IRandomColorService
 	{
-		Color GenerateRandomColour();
+		Color GenerateRandomColor();
 	}
 
 	/// <summary>
 	/// http://stackoverflow.com/questions/730625/how-do-i-create-a-random-hex-string-that-represents-a-color
 	/// </summary>
-	public class RandomColourService : IRandomColourService
+	public class RandomColorService : IRandomColorService
 	{
 		private Random _random;
 
-		public RandomColourService ()
+		public RandomColorService ()
 		{
 			_random = new Random ();
 		}
 
-		public Color GenerateRandomColour()
+		public Color GenerateRandomColor()
 		{
 			return Color.FromHex(String.Format("#{0:X6}", _random.Next(0x1000000)));
 		}

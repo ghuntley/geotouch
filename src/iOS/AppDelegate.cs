@@ -9,6 +9,8 @@ using TwinTechs.Gestures;
 using Foundation;
 using UIKit;
 
+using GeoTouch.Services;
+
 namespace GeoTouch.iOS
 {
 	[Register ("AppDelegate")]
@@ -20,7 +22,7 @@ namespace GeoTouch.iOS
 
 			// TODO: Move to Splat IoC
 			GestureRecognizerExtensions.Factory = new NativeGestureRecognizerFactory ();
-			Locator.CurrentMutable.RegisterConstant (new RandomColourService (), typeof(IRandomColourService));
+			Locator.CurrentMutable.RegisterConstant (new RandomColorService (), typeof(IRandomColorService));
 
 			// Code for starting up the Xamarin Test Cloud Agent
 			#if ENABLE_TEST_CLOUD

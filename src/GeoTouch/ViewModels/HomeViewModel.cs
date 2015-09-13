@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using PropertyChanged;
 using Splat;
-using System.Drawing;
+using Xamarin.Forms;
+using GeoTouch.Services;
 
 namespace GeoTouch.ViewModels
 {
@@ -17,10 +18,19 @@ namespace GeoTouch.ViewModels
 			return null;
 		}
 
+		public Color GenerateRandomColor()
+		{
+			return _randomColourService.GenerateRandomColor ();
+		}
+
+		private IRandomColorService _randomColourService;
+
 		public string Title { get; set; }
 
-		public HomeViewModel ()
+		public HomeViewModel (IRandomColorService randomColourService = null)
 		{
+			_randomColourService = randomColourService ?? Locator.Current.GetService<IRandomColorService> ();
+
 			Task.Run (async () => 
 			{
 				while (true)

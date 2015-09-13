@@ -2,12 +2,14 @@
 using System.Windows.Input;
 
 using Splat;
-using System.Drawing;
+using Xamarin.Forms;
 
-namespace GeoTouch
+namespace GeoTouch.ViewModels
 {
 	public interface IHomeViewModel
 	{
+		Color GenerateRandomColor();
+
 		ICommand PlaceShape();
 
 		string Title { get; set;}

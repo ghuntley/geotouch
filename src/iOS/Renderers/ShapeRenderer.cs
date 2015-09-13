@@ -9,6 +9,7 @@ using UIKit;
 
 using Splat;
 using GeoTouch;
+using GeoTouch.Services;
 using GeoTouch.Controls;
 using GeoTouch.iOS;
 
@@ -18,17 +19,15 @@ namespace GeoTouch.iOS
 {
 	public class ShapeRenderer :  ViewRenderer
 	{
-		private IRandomColourService _randomColourService;
 
 		public ShapeRenderer ()
 		{
-			_randomColourService = Locator.Current.GetService<IRandomColourService> ();
 		}
 
 		// can access shape via this.
 		protected override void OnElementChanged (ElementChangedEventArgs<View> e)
 		{
-			base.OnElementChanged (e.NewElement);
+			base.OnElementChanged (e);
 		}
 
 		// fired every time the property binding changes.
@@ -36,16 +35,31 @@ namespace GeoTouch.iOS
 		{
 			base.OnElementPropertyChanged (sender, e);
 
-			if (Control == null || Element == null)
+			if (Control == null || Element == null) {
 				return;
+			}
+
+			if (e.PropertyName == ShapeView.ColorProperty.PropertyName)
+			{
+			}
+
+//			if (e.PropertyName == ShapeView.ImageUrlProperty.PropertyName)
+//			{
+//			}
+//
+//			if (e.PropertyName == ShapeView.TitleProperty.PropertyName)
+//			{
+//			}
 		}
 
 		public override void Draw (CGRect rect)
 		{
+			var shapeView = (ShapeView)Element;
+
 			using (var context = UIGraphics.GetCurrentContext ()) {
 				var path = CGPath.EllipseFromRect (rect);
 				context.AddPath (path);
-				context.SetFillColor (_randomColourService.GenerateRandomColour ().ToCGColor ());
+				context.SetFillColor (shapeView.Color.ToCGColor ());
 				context.DrawPath (CGPathDrawingMode.Fill);
 			}
 		}
