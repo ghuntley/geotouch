@@ -20,7 +20,6 @@ namespace GeoTouch.iOS
 		{
 			global::Xamarin.Forms.Forms.Init ();
 
-			// TODO: Move to Splat IoC
 			GestureRecognizerExtensions.Factory = new NativeGestureRecognizerFactory ();
 			Locator.CurrentMutable.RegisterConstant (new RandomColorService (), typeof(IRandomColorService));
 			Locator.CurrentMutable.RegisterConstant (new ColourLoversService (), typeof(IColourLoversService));
