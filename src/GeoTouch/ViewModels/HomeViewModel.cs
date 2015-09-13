@@ -61,12 +61,10 @@ namespace GeoTouch.ViewModels
             }
 
 			try {
-	            var response = await _colourLoversService.UserInitiated.GetRandomColour();
-	            var result = response.Single ();
-
-	            viewModel.Color = Color.FromHex(result.hex);
+				var response = _colourLoversService.GetNextRandomColour();
+	            viewModel.Color = Color.FromHex(response.hex);
 			}
-			catch (WebException ex) {
+			catch (Exception ex) {
 				viewModel.Color = _randomColourService.GenerateRandomColor ();
 			}
 

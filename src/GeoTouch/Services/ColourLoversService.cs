@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using ColourLovers.ServiceModel;
 
 using ModernHttpClient;
 
@@ -25,6 +27,9 @@ namespace GeoTouch
         {
             get;
         }
+
+		Colors GetNextRandomColour();
+		Patterns GetNextRandomPattern();
     }
 
     public class ColourLoversService : IColourLoversService
@@ -35,9 +40,28 @@ namespace GeoTouch
         private readonly Lazy<IColourLoversApi> _speculative;
         private readonly Lazy<IColourLoversApi> _userInitiated;
 
+		private List<Colors> _colors = new List<Colors> ();
+		private List<Patterns> _patterns = new List<Patterns> ();
+
+		public Colors GetNextRandomColour()
+		{
+			var color = _colors.Last();
+			_colors.Remove (color);
+
+			return color;
+		}
+
+		public Patterns GetNextRandomPattern()
+		{
+			var pattern = _patterns.Last ();
+			_patterns.Remove (pattern);
+
+			return pattern;
+		}
+
         public ColourLoversService(string apiBaseAddress = null)
         {
-            Func<HttpMessageHandler, IColourLoversApi> createClient = messageHandler =>
+			Func<HttpMessageHandler, IColourLoversApi> createClient = messageHandler =>
             {
                 var client = new HttpClient(messageHandler)
                 {
@@ -61,6 +85,35 @@ namespace GeoTouch
             // _speculative = new Lazy<IColourLoversApi>(() => createClient(
             //	new RateLimitedHttpMessageHandler(new NativeMessageHandler(), Priority.Speculative)));
             _speculative = new Lazy<IColourLoversApi>(() => createClient(new NativeMessageHandler()));
+
+			Task.Run (async () =>
+				{
+					while (true)
+					{
+						try {
+							if (_colors.Count < 50)
+							{
+								var response = await this.Background.GetRandomColour();
+								var colour  = response.Single();
+								_colors.Add(colour);
+							}
+							if (_patterns.Count < 50)
+							{
+								var response = await this.Background.GetRandomPattern();
+								var pattern  = response.Single();
+								_patterns.Add(pattern);
+							}
+
+							await Task.Delay(100);
+						}
+						catch (Exception ex)
+						{
+							// swallow
+						}
+					}
+				});
+			
+
         }
 
         public IColourLoversApi Background
