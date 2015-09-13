@@ -8,7 +8,7 @@ namespace GeoTouch.ViewModels
 {
 	public interface IHomeViewModel
 	{
-		Color GenerateRandomColor();
+		ShapeViewModel GenerateRandomShape();
 
 		ICommand PlaceShape();
 

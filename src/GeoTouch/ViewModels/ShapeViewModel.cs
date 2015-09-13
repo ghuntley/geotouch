@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Input;
 
 using GeoTouch.Models;
 
 using PropertyChanged;
-
+using Xamarin.Forms;
 using Splat;
 
 namespace GeoTouch.ViewModels

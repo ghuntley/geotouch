@@ -40,15 +40,25 @@ namespace GeoTouch
 			var positionInView = recognizer.LocationInView (view);
 			var positionInParentView = recognizer.LocationInView (view.ParentView);
 
-			var shape = new ShapeView() { Color = ViewModel.GenerateRandomColor(), Shape = Shape.Square };
-				
-			AbsoluteLayout.SetLayoutFlags (shape,
+
+			var shapeViewModel = ViewModel.GenerateRandomShape ();
+			var shapeView = new ShapeView () {
+				BindingContext = shapeViewModel
+			};
+
+			shapeView.SetBinding (ShapeView.ColorProperty, "Color");
+			shapeView.SetBinding (ShapeView.ImageUrlProperty, "ImageUrl");
+			shapeView.SetBinding (ShapeView.ShapeProperty, "Shape");
+			shapeView.SetBinding (ShapeView.TitleProperty, "Title");
+			shapeView.SetBinding (ShapeView.OnDoubleTapProperty, "RefreshShape");
+
+			AbsoluteLayout.SetLayoutFlags (shapeView,
 				AbsoluteLayoutFlags.None);
 
-			AbsoluteLayout.SetLayoutBounds (shape,
+			AbsoluteLayout.SetLayoutBounds (shapeView,
 				new Rectangle (x: positionInView.X, y: positionInView.Y, height: 200f, width: 50f));
 
-			Canvas.Children.Add (shape);
+			Canvas.Children.Add (shapeView);
 //						ViewModel.PlaceShape(new PointF(sender.X);
 
 
