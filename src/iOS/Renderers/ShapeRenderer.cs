@@ -9,6 +9,7 @@ using UIKit;
 
 using Splat;
 using GeoTouch;
+using GeoTouch.Models;
 using GeoTouch.Services;
 using GeoTouch.Controls;
 using GeoTouch.iOS;
@@ -54,14 +55,36 @@ namespace GeoTouch.iOS
 
 		public override void Draw (CGRect rect)
 		{
+			HandleDraw (rect);
+		}
+
+		public void HandleDraw (CGRect rect)
+		{
 			var shapeView = (ShapeView)Element;
 
-			using (var context = UIGraphics.GetCurrentContext ()) {
-				var path = CGPath.EllipseFromRect (rect);
-				context.AddPath (path);
-				context.SetFillColor (shapeView.Color.ToCGColor ());
-				context.DrawPath (CGPathDrawingMode.Fill);
+			if (shapeView.Shape == Shape.Circle) {
+				using (var context = UIGraphics.GetCurrentContext ()) {
+					var path = CGPath.EllipseFromRect (rect);
+					context.AddPath (path);
+					context.SetFillColor (shapeView.Color.ToCGColor ());
+					context.DrawPath (CGPathDrawingMode.Fill);
+				}
+
+				return;
 			}
+
+			if (shapeView.Shape == Shape.Square) {
+				using (var context = UIGraphics.GetCurrentContext ()) {
+					var path = CGPath.FromRect(rect);
+					context.AddPath (path);
+					context.SetFillColor (shapeView.Color.ToCGColor ());
+					context.DrawPath (CGPathDrawingMode.Fill);
+				}
+
+				return;
+			}
+
+			throw new InvalidOperationException ("Element is a invalid shape, aborting");
 		}
 	}
 }
