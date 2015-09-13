@@ -3,17 +3,20 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Splat;
+
 using Xamarin.Forms;
 
 namespace GeoTouch.ViewModels
 {
-	public interface IHomeViewModel
-	{
-		Task<ShapeViewModel> GenerateRandomShapeAsync();
+    public interface IHomeViewModel
+    {
+        string Title
+        {
+            get; set;
+        }
 
-		ICommand PlaceShape();
+        Task<ShapeViewModel> GenerateRandomShapeAsync();
 
-		string Title { get; set;}
-	}
+        ICommand PlaceShape();
+    }
 }
-

@@ -1,69 +1,75 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
-using System.Windows.Input;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics;
-using PropertyChanged;
-using Splat;
-using Xamarin.Forms;
+using System.Windows.Input;
+
 using GeoTouch.Models;
 using GeoTouch.Services;
 
+using PropertyChanged;
+
+using Splat;
+
+using Xamarin.Forms;
+
 namespace GeoTouch.ViewModels
 {
-	[ImplementPropertyChanged]
-	public class HomeViewModel : IHomeViewModel
-	{
-		public ICommand PlaceShape()
-		{
-			return null;
-		}
+    [ImplementPropertyChanged]
+    public class HomeViewModel : IHomeViewModel
+    {
+        private IColourLoversService _colourLoversService;
+        private Random _random;
+        private IRandomColorService _randomColourService;
 
-		public async Task<ShapeViewModel> GenerateRandomShapeAsync()
-		{
-			var viewModel = new ShapeViewModel ();
+        public HomeViewModel(IRandomColorService randomColourService = null, IColourLoversService colourLoversService = null)
+        {
+            _randomColourService = randomColourService ?? Locator.Current.GetService<IRandomColorService> ();
 
-			if (_random.Next () % 2 != 0) {
-				viewModel.Shape = Shape.Square;
-			}
-			else
-			{
-				viewModel.Shape = Shape.Circle;
-			}
+            _colourLoversService = colourLoversService ?? Locator.Current.GetService<IColourLoversService> ();
 
-			var response = await _colourLoversService.UserInitiated.GetRandomColour();
-			var result = response.Single ();
+            _random = new Random ();
 
-			viewModel.Color = Color.FromHex(result.hex);
-//			viewModel.Color = _randomColourService.GenerateRandomColor ();
+            Task.Run (async () =>
+            {
+                while (true)
+                {
+                    Title = DateTime.UtcNow.ToString();
+                    await Task.Delay(1000);
+                }
+            });
+        }
 
-			return viewModel;
-		}
+        public string Title
+        {
+            get; set;
+        }
 
-		private Random _random;
-		private IColourLoversService _colourLoversService;
-		private IRandomColorService _randomColourService;
+        public async Task<ShapeViewModel> GenerateRandomShapeAsync()
+        {
+            var viewModel = new ShapeViewModel ();
 
-		public string Title { get; set; }
+            if (_random.Next () % 2 != 0) {
+                viewModel.Shape = Shape.Square;
+            }
+            else
+            {
+                viewModel.Shape = Shape.Circle;
+            }
 
-		public HomeViewModel (IRandomColorService randomColourService = null, IColourLoversService colourLoversService = null)
-		{
-			_randomColourService = randomColourService ?? Locator.Current.GetService<IRandomColorService> ();
+            var response = await _colourLoversService.UserInitiated.GetRandomColour();
+            var result = response.Single ();
 
-			_colourLoversService = colourLoversService ?? Locator.Current.GetService<IColourLoversService> ();
+            viewModel.Color = Color.FromHex(result.hex);
+            //			viewModel.Color = _randomColourService.GenerateRandomColor ();
 
-			_random = new Random ();
+            return viewModel;
+        }
 
-			Task.Run (async () => 
-			{
-				while (true)
-				{
-					Title = DateTime.UtcNow.ToString();
-					await Task.Delay(1000);
-				}
-			});
-		}
-	}
+        public ICommand PlaceShape()
+        {
+            return null;
+        }
+    }
 }
-

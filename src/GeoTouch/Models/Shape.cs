@@ -2,10 +2,9 @@
 
 namespace GeoTouch.Models
 {
-	public enum Shape
-	{
-		Square = 0,
-		Circle = 1
-	}
+    public enum Shape
+    {
+        Square = 0,
+        Circle = 1
+    }
 }
-

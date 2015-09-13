@@ -1,21 +1,27 @@
 ﻿using System;
+
 using Xamarin.Forms;
 
 namespace TwinTechs.Gestures
 {
-	public interface INativeGestureRecognizer
-	{
-		int NumberOfTouches { get; }
+    public interface INativeGestureRecognizer
+    {
+        int NumberOfTouches
+        {
+            get;
+        }
 
-		Point LocationInView (VisualElement view);
+        GestureRecognizerState State
+        {
+            get;
+        }
 
-		Point LocationOfTouch (int touchIndex, VisualElement view);
+        Point LocationInView(VisualElement view);
 
-		GestureRecognizerState State { get; }
+        Point LocationOfTouch(int touchIndex, VisualElement view);
 
-		void UpdateCancelsTouchesInView (bool _cancelsTouchesInView);
+        void UpdateCancelsTouchesInView(bool _cancelsTouchesInView);
 
-		void UpdateDelaysTouches (bool _delaysTouches);
-	}
+        void UpdateDelaysTouches(bool _delaysTouches);
+    }
 }
-

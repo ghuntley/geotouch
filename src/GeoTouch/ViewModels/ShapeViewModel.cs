@@ -4,8 +4,10 @@ using System.Windows.Input;
 using GeoTouch.Models;
 
 using PropertyChanged;
-using Xamarin.Forms;
+
 using Splat;
+
+using Xamarin.Forms;
 
 namespace GeoTouch.ViewModels
 {

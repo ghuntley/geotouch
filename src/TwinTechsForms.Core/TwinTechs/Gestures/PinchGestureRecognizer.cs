@@ -1,34 +1,30 @@
 ﻿using System;
+
 using Xamarin.Forms;
 
 namespace TwinTechs.Gestures
 {
+    public interface INativePinchGestureRecognizer : INativeGestureRecognizer
+    {
+        float Scale();
 
-	public interface INativePinchGestureRecognizer : INativeGestureRecognizer
-	{
-		float Scale ();
+        float Velocity();
+    }
 
-		float Velocity ();
-	}
+    public class PinchGestureRecognizer : BaseGestureRecognizer
+    {
+        public PinchGestureRecognizer()
+        {
+        }
 
+        public float Scale()
+        {
+            return (NativeGestureRecognizer as INativePinchGestureRecognizer).Scale ();
+        }
 
-	public class PinchGestureRecognizer : BaseGestureRecognizer
-	{
-		public float Scale ()
-		{
-			return (NativeGestureRecognizer as INativePinchGestureRecognizer).Scale ();
-		}
-
-		public float Velocity ()
-		{
-			return (NativeGestureRecognizer as INativePinchGestureRecognizer).Velocity ();
-		}
-
-		public PinchGestureRecognizer ()
-		{
-		}
-
-
-	}
+        public float Velocity()
+        {
+            return (NativeGestureRecognizer as INativePinchGestureRecognizer).Velocity ();
+        }
+    }
 }
-
