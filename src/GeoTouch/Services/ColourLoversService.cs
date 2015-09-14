@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+
 using ColourLovers.ServiceModel;
 
 using ModernHttpClient;
@@ -28,8 +29,9 @@ namespace GeoTouch
             get;
         }
 
-		Colors GetNextRandomColour();
-		Patterns GetNextRandomPattern();
+        Colors GetNextRandomColour();
+
+        Patterns GetNextRandomPattern();
     }
 
     public class ColourLoversService : IColourLoversService
@@ -40,30 +42,12 @@ namespace GeoTouch
         private readonly Lazy<IColourLoversApi> _speculative;
         private readonly Lazy<IColourLoversApi> _userInitiated;
 
-		private List<Colors> _colors = new List<Colors> ();
-		private List<Patterns> _patterns = new List<Patterns> ();
-
-        /// <exception cref="">exception will be thrown if the cache is empty (ie. cache empty due to no network connectivity)</exception>
-		public Colors GetNextRandomColour()
-		{
-			var color = _colors.Last();
-			_colors.Remove (color);
-
-			return color;
-		}
-
-        /// <exception cref="">exception will be thrown if the cache is empty (ie. cache empty due to no network connectivity)</exception>
-		public Patterns GetNextRandomPattern()
-		{
-			var pattern = _patterns.Last ();
-			_patterns.Remove (pattern);
-
-			return pattern;
-		}
+        private List<Colors> _colors = new List<Colors> ();
+        private List<Patterns> _patterns = new List<Patterns> ();
 
         public ColourLoversService(string apiBaseAddress = null)
         {
-			Func<HttpMessageHandler, IColourLoversApi> createClient = messageHandler =>
+            Func<HttpMessageHandler, IColourLoversApi> createClient = messageHandler =>
             {
                 var client = new HttpClient(messageHandler)
                 {
@@ -88,34 +72,32 @@ namespace GeoTouch
             //	new RateLimitedHttpMessageHandler(new NativeMessageHandler(), Priority.Speculative)));
             _speculative = new Lazy<IColourLoversApi>(() => createClient(new NativeMessageHandler()));
 
-			Task.Run (async () =>
-				{
-					while (true)
-					{
-						try {
-							if (_colors.Count < 50)
-							{
-								var response = await this.Background.GetRandomColour();
-								var colour  = response.Single();
-								_colors.Add(colour);
-							}
-							if (_patterns.Count < 50)
-							{
-								var response = await this.Background.GetRandomPattern();
-								var pattern  = response.Single();
-								_patterns.Add(pattern);
-							}
+            Task.Run (async () =>
+                {
+                    while (true)
+                    {
+                        try {
+                            if (_colors.Count < 50)
+                            {
+                                var response = await this.Background.GetRandomColour();
+                                var colour  = response.Single();
+                                _colors.Add(colour);
+                            }
+                            if (_patterns.Count < 50)
+                            {
+                                var response = await this.Background.GetRandomPattern();
+                                var pattern  = response.Single();
+                                _patterns.Add(pattern);
+                            }
 
-							await Task.Delay(100);
-						}
-						catch (Exception ex)
-						{
-							// swallow
-						}
-					}
-				});
-			
-
+                            await Task.Delay(100);
+                        }
+                        catch (Exception ex)
+                        {
+                            // swallow
+                        }
+                    }
+                });
         }
 
         public IColourLoversApi Background
@@ -131,6 +113,24 @@ namespace GeoTouch
         public IColourLoversApi UserInitiated
         {
             get { return _userInitiated.Value; }
+        }
+
+        /// <exception cref="">exception will be thrown if the cache is empty (ie. cache empty due to no network connectivity)</exception>
+        public Colors GetNextRandomColour()
+        {
+            var color = _colors.Last();
+            _colors.Remove (color);
+
+            return color;
+        }
+
+        /// <exception cref="">exception will be thrown if the cache is empty (ie. cache empty due to no network connectivity)</exception>
+        public Patterns GetNextRandomPattern()
+        {
+            var pattern = _patterns.Last ();
+            _patterns.Remove (pattern);
+
+            return pattern;
         }
     }
 }
