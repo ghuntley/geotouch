@@ -119,6 +119,12 @@
     <Reference Include="PLCrashReporterUnifiedBinding">
       <HintPath>..\GeoTouch\packages\Xamarin.Insights.1.10.6\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
     </Reference>
+    <Reference Include="DeviceMotion.Plugin.Abstractions">
+      <HintPath>..\GeoTouch\packages\Xam.Plugin.DeviceMotion.1.0.3\lib\Xamarin.iOS10\DeviceMotion.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="DeviceMotion.Plugin">
+      <HintPath>..\GeoTouch\packages\Xam.Plugin.DeviceMotion.1.0.3\lib\Xamarin.iOS10\DeviceMotion.Plugin.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GeoTouch\GeoTouch.csproj">
