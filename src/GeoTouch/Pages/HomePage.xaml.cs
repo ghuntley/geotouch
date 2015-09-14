@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using DeviceMotion.Plugin;
+using DeviceMotion.Plugin.Abstractions;
+
 using GeoTouch.Controls;
 using GeoTouch.Models;
 using GeoTouch.ViewModels;
@@ -27,6 +30,9 @@ namespace GeoTouch
 
             // https://bugzilla.xamarin.com/show_bug.cgi?id=30467
             Canvas.ProcessGestureRecognizers ();
+
+            CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, MotionSensorDelay.Game);
+            CrossDeviceMotion.Current.SensorValueChanged += OnDeviceMotion;
         }
 
         protected override void OnDisappearing()
@@ -34,6 +40,7 @@ namespace GeoTouch
             base.OnDisappearing();
 
             Canvas.RemoveAllGestureRecognizers();
+            CrossDeviceMotion.Current.Stop(MotionSensorType.Accelerometer);
         }
 
         // TODO: Resolve async void
@@ -64,6 +71,20 @@ namespace GeoTouch
 
             Canvas.Children.Add (shapeView);
             //						ViewModel.PlaceShape(new PointF(sender.X);
+        }
+
+        private void OnDeviceMotion(object sender, DeviceMotion.Plugin.Abstractions.SensorValueChangedEventArgs e)
+        {
+            switch(e.SensorType){
+                case MotionSensorType.Accelerometer:
+                    var motion = (MotionVector)sender;
+
+            //                    Debug.WriteLine("A: {0},{1},{2}",((MotionVector)a.Value).X,((MotionVector)a.Value).Y,((MotionVector)a.Value).Z);
+                    break;
+                case MotionSensorType.Compass:
+            //                    Debug.WriteLine("H: {0}",a.Value);
+                    break;
+            }
         }
     }
 }
