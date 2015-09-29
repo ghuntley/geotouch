@@ -10,8 +10,6 @@
     <AssemblyName>TwinTechsForms</AssemblyName>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +33,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TwinTechs\Controls\FastCell.cs" />
+    <Compile Include="TwinTechs\Controls\FastImage.cs" />
+    <Compile Include="TwinTechs\Controls\IFastCellCache.cs" />
+    <Compile Include="XLabs\Forms\Controls\FastGridCell.cs" />
+    <Compile Include="XLabs\Forms\Controls\GridView.cs" />
     <Compile Include="TwinTechs\Extensions\ViewExtensions.cs" />
     <Compile Include="TwinTechs\Gestures\BaseGestureRecognizer.cs" />
     <Compile Include="TwinTechs\Gestures\GestureRecognizerExtensions.cs" />
@@ -44,7 +47,10 @@
     <Compile Include="TwinTechs\Gestures\PanGestureRecognizer.cs" />
     <Compile Include="TwinTechs\Gestures\PinchGestureRecognizer.cs" />
     <Compile Include="TwinTechs\Gestures\SwipeGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Controls\PageViewContainer.cs" />
+    <Compile Include="XLabs\GridEventArgs{T}.cs" />
     <Compile Include="TwinTechs\Gestures\TapGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Controls\IScrollAwareElement.cs" />
     <Compile Include="TwinTechs\Gestures\INativeGestureRecognizerCoordinator.cs" />
     <Compile Include="TwinTechs\Gestures\Converters\SwipeGestureRecognizerDirectonConverter.cs" />
     <Compile Include="TwinTechs\Extensions\PointExtensions.cs" />
@@ -54,6 +60,7 @@
   <Import Project="..\packages\Xamarin.Forms.1.4.4.6392\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.4.6392\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <ItemGroup>
     <Folder Include="TwinTechs\" />
+    <Folder Include="TwinTechs\Controls\" />
     <Folder Include="TwinTechs\Gestures\Converters\" />
   </ItemGroup>
   <ItemGroup>

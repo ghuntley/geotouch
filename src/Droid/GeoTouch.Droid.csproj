@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -15,7 +15,7 @@
     <AndroidApplication>True</AndroidApplication>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AssemblyName>GeoTouch.Droid</AssemblyName>
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v5.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,6 +69,14 @@
       <Project>{EC9ABB5A-A1EE-4FBE-BCA7-0F536B5E3014}</Project>
       <Name>GeoTouch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TwinTechsForms.Core\TwinTechsForms.Core.csproj">
+      <Project>{7c5d7e33-c77e-475f-be8b-359cd164a4e5}</Project>
+      <Name>TwinTechsForms.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinTechsForms.Droid\TwinTechsForms.Droid.csproj">
+      <Project>{f4fddb8d-1dad-4558-b62c-cdbd703f9b9d}</Project>
+      <Name>TwinTechsForms.Droid</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -86,7 +94,6 @@
   <ItemGroup>
     <Folder Include="Resources\layout\" />
     <Folder Include="Resources\values\" />
-    <Folder Include="Renderers\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon.png" />

@@ -7,6 +7,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using GeoTouch.Services;
+using Splat;
+using TwinTechs.Gestures;
 
 namespace GeoTouch.Droid
 {
@@ -19,7 +22,11 @@ namespace GeoTouch.Droid
 
             global::Xamarin.Forms.Forms.Init (this, bundle);
 
-            LoadApplication (new App ());
+            GestureRecognizerExtensions.Factory = new NativeGestureRecognizerFactory();
+            Locator.CurrentMutable.RegisterConstant(new RandomColorService(), typeof(IRandomColorService));
+            Locator.CurrentMutable.RegisterConstant(new ColourLoversService(), typeof(IColourLoversService));
+
+            LoadApplication(new App ());
         }
     }
 }

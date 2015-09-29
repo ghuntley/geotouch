@@ -1,38 +1,43 @@
 ﻿using System;
-
-using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using Xamarin.Forms;
 
 namespace TwinTechs.Ios.Extensions
 {
-    public static class ViewExtensions
-    {
-        private static GetRendererDelegate _getRendererDelegate;
+	public static class ViewExtensions
+	{
+		
+		/***
+		 * Thanks to Adam Kemp for generously making this code available.
+		 * If you are reading this, please petition Xamarin to give us public access to the GetRenderer method:
+		 * https://bugzilla.xamarin.com/show_bug.cgi?id=30467
+		 */
 
-        private delegate IVisualElementRenderer GetRendererDelegate(BindableObject bindable);
+		#region GetRenderer Hack
 
-        public static IVisualElementRenderer GetRenderer(this BindableObject bindable)
-        {
-            if (bindable == null) {
-                return null;
-            }
+		private delegate IVisualElementRenderer GetRendererDelegate (BindableObject bindable);
 
-            if (_getRendererDelegate == null) {
-                var assembly = typeof(EntryRenderer).Assembly;
-                var platformType = assembly.GetType ("Xamarin.Forms.Platform.iOS.Platform");
-                var method = platformType.GetMethod ("GetRenderer");
-                _getRendererDelegate = (GetRendererDelegate)method.CreateDelegate (typeof(GetRendererDelegate));
-            }
+		private static GetRendererDelegate _getRendererDelegate;
 
-            var value = _getRendererDelegate (bindable);
+		public static IVisualElementRenderer GetRenderer (this BindableObject bindable)
+		{
+			if (bindable == null) {
+				return null;
+			}
 
-            return value;
-        }
+			if (_getRendererDelegate == null) {
+				var assembly = typeof(EntryRenderer).Assembly;
+				var platformType = assembly.GetType ("Xamarin.Forms.Platform.iOS.Platform");
+				var method = platformType.GetMethod ("GetRenderer");
+				_getRendererDelegate = (GetRendererDelegate)method.CreateDelegate (typeof(GetRendererDelegate));
+			}
 
-        /***
-         * Thanks to Adam Kemp for generously making this code available.
-         * If you are reading this, please petition Xamarin to give us public access to the GetRenderer method:
-         * https://bugzilla.xamarin.com/show_bug.cgi?id=30467
-         */
-    }
+			var value = _getRendererDelegate (bindable);
+
+			return value;
+		}
+
+		#endregion
+	}
 }
+

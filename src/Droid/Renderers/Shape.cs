@@ -13,7 +13,7 @@ namespace GeoTouch.Droid
 {
     public class Shape : View
     {
-        public Shape()
+        public Shape(Context context) : base(context)
         {
         }
 
